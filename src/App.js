@@ -15,7 +15,7 @@ const QuizApp = () => {
       .then((data) => {
         console.log("Fetched Quiz Data:", data);
         if (data.questions) {
-          setQuizData(data.questions); // Ensure we get the 'questions' array
+          setQuizData(data.questions); 
         } else {
           console.error("Invalid data format: Missing 'questions' array.");
         }
@@ -28,14 +28,12 @@ const QuizApp = () => {
   };
 
   const handleNextQuestion = () => {
-    // Check if the selected answer is correct
     const correctAnswer = quizData[currentQuestion].options.find((ans) => ans.is_correct);
     if (selectedAnswer === correctAnswer?.description) {
       setScore(score + 1);
     }
     setSelectedAnswer(null);
 
-    // Move to the next question or show results
     if (currentQuestion + 1 < quizData.length) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -52,7 +50,6 @@ const QuizApp = () => {
         </motion.div>
       ) : quizData.length > 0 ? (
         <motion.div className="question-container" initial={{ x: -100 }} animate={{ x: 0 }} transition={{ duration: 0.5 }}>
-          {/* Displaying the question properly */}
           <h2>{quizData[currentQuestion].description}</h2> 
 
           <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
@@ -60,11 +57,11 @@ const QuizApp = () => {
               <motion.li
                 key={index}
                 className={selectedAnswer === option.description ? "selected" : ""}
-                onClick={() => handleAnswerSelection(option.description)} // Use 'description' for text
+                onClick={() => handleAnswerSelection(option.description)} 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                {option.description} {/* Display description instead of text */}
+                {option.description} 
               </motion.li>
             ))}
           </motion.ul>
